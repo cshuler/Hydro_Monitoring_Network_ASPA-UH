@@ -1,0 +1,16 @@
+name:  aspa_MonNet
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - matplotlib
+  - pandas
+  - scipy
+  - notebook 
+  - gdal
+  - scikit-learn
+  - lmfit
+  - xlrd
+  - geopandas
+  - simplekml
