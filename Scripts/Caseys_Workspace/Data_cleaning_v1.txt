@@ -1,0 +1,43 @@
+import pandas as pd
+
+# Load the Excel file
+file_path = 'your_file_path_here.xlsx'  # Replace with your actual file path
+df = pd.read_excel(file_path, skiprows=3)  # Adjust skiprows as needed to skip metadata rows
+
+# New header to apply
+new_header = [
+    "Date/Time", "Swin_Avg (W/m²)", "Thermocouple C", "RH_Avg Percent", 
+    "VP_Avg (kPa)", "VPsat_Avg (kPa)", "VPD_Avg (kPa)", "WS_Avg (m/s)", 
+    "WSrs_Avg (m/s)", "WDuv_Avg (degrees)", "WDrs_Avg (degrees)", 
+    "WD_StdY (degrees)", "WD_StdCS (degrees)", "RF_Tot (mm)"
+]
+
+# Map the current columns to the new header
+new_header_mapping = {
+    'Unnamed: 0': 'Date/Time',
+    'Avg': 'Swin_Avg (W/m²)',
+    'Avg.1': 'Thermocouple C',
+    'Smp': 'RH_Avg Percent',
+    'Avg.2': 'VP_Avg (kPa)',
+    'Avg.3': 'VPsat_Avg (kPa)',
+    'Avg.4': 'VPD_Avg (kPa)',
+    'Smp.1': 'WS_Avg (m/s)',
+    'Smp.2': 'WSrs_Avg (m/s)',
+    'Smp.3': 'WDuv_Avg (degrees)',
+    'Smp.4': 'WDrs_Avg (degrees)',
+    'Smp.5': 'WD_StdY (degrees)',
+    'Smp.6': 'WD_StdCS (degrees)',
+    'Tot': 'RF_Tot (mm)'
+}
+
+# Renaming the columns based on the mapping
+df_cleaned = df.rename(columns=new_header_mapping)
+
+# Dropping the 'RECORD' column which is likely the second column
+df_cleaned = df_cleaned.drop(columns=['Unnamed: 1'])
+
+# Saving the cleaned DataFrame to a new Excel file
+output_file_path = 'cleaned_data.xlsx'
+df_cleaned.to_excel(output_file_path, index=False)
+
+print(f"Cleaned data saved to {output_file_path}")

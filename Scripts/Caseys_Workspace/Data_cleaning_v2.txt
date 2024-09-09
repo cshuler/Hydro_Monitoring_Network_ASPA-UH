@@ -1,0 +1,49 @@
+import pandas as pd
+import os
+
+def clean_weather_data(file_path, output_dir=None, output_file_name=None):
+    # Load the Excel file, skipping the first 3 rows
+    df = pd.read_excel(file_path, skiprows=3)
+
+    # New header to apply
+    new_header_mapping = {
+        'Unnamed: 0': 'Date/Time',
+        'Avg': 'Swin_Avg (W/m²)',
+        'Avg.1': 'Thermocouple C',
+        'Smp': 'RH_Avg Percent',
+        'Avg.2': 'VP_Avg (kPa)',
+        'Avg.3': 'VPsat_Avg (kPa)',
+        'Avg.4': 'VPD_Avg (kPa)',
+        'Smp.1': 'WS_Avg (m/s)',
+        'Smp.2': 'WSrs_Avg (m/s)',
+        'Smp.3': 'WDuv_Avg (degrees)',
+        'Smp.4': 'WDrs_Avg (degrees)',
+        'Smp.5': 'WD_StdY (degrees)',
+        'Smp.6': 'WD_StdCS (degrees)',
+        'Tot': 'RF_Tot (mm)'
+    }
+
+    # Renaming the columns based on the mapping
+    df_cleaned = df.rename(columns=new_header_mapping)
+
+    # Dropping the 'RECORD' column which is likely the second column
+    df_cleaned = df_cleaned.drop(columns=['Unnamed: 1'])
+
+    # Determine the output file name and directory
+    if output_file_name is None:
+        base_name = os.path.basename(file_path)
+        output_file_name = f"cleaned_{base_name}"
+    
+    if output_dir is None:
+        output_dir = os.path.dirname(file_path)
+
+    output_file_path = os.path.join(output_dir, output_file_name)
+
+    # Save the cleaned DataFrame to a new Excel file
+    df_cleaned.to_excel(output_file_path, index=False)
+
+    print(f"Cleaned data saved to {output_file_path}")
+
+# Example usage
+file_path = 'your_file_path_here.xlsx'  # Replace with your actual file path
+clean_weather_data(file_path)
