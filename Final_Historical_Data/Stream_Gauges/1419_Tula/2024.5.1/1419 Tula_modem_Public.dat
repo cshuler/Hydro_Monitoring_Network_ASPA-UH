@@ -1,0 +1,5 @@
+"TOA5","1419_Tula","CR350","5767","CR350-CELL205.Std.01.04","CPU:Samoa_mesonet_SG_v02.CRB","28596","Public"
+"TIMESTAMP","RECORD","BattVolt","Tpanel","TCair","WTlvl","Twt_F","RHenc"
+"TS","RN","Volts","Deg C","Deg F","cm","deg F","%"
+"","","","","","","",""
+"2024-05-01 08:51:50.853",794326,12.98275,30.50303,86.17001,16.71351,80.18362,38.68036

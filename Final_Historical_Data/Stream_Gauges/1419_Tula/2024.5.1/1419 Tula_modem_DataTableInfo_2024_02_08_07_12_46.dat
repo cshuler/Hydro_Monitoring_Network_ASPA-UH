@@ -1,0 +1,5 @@
+"TOA5","1419_Tula","CR350","5767","CR350-CELL205.Std.01.04","CPU:Samoa_mesonet_SG_v02.CRB","28596","DataTableInfo"
+"TIMESTAMP","RECORD","DataTableName(1)","DataTableName(2)","SkippedRecord(1)","SkippedRecord(2)","DataRecordSize(1)","DataRecordSize(2)","SecsPerRecord(1)","SecsPerRecord(2)","DataFillDays(1)","DataFillDays(2)","DataFilled(1,1)","DataFilled(2,1)"
+"TS","RN","","","","","records","records","","","days","days","",""
+"","","","","","","","","","","","","",""
+"2024-05-01 08:50:02.857",2504,"Five_minute","Hourly",2303,192,3578855,301320,300,3600,12426.58,12555," 0.4 percent filled"," 0.7 percent filled"

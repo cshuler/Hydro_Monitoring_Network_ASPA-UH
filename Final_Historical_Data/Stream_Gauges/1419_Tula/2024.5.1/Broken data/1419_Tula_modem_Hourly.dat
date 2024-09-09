@@ -1,0 +1,6 @@
+"TOA5","1419_Tula_modem","CR350","5767","CR350-CELL205.Std.01.04","CPU:Samoa_mesonet_SG_v01.CRB","59738","Hourly"
+"TIMESTAMP","RECORD","BattV_Min"
+"TS","RN","Volts"
+"","","Min"
+"2024-05-01 09:00:00",0,12.9
+"2024-05-01 10:00:00",1,12.86

@@ -1,0 +1,6 @@
+"TOA5","1417_Afono","CR350","5663","CR350-CELL205.Std.01.04","CPU:Samoa Mesonet_stream gauge_v04p1.CRB","55812","DataTableInfo"
+"TIMESTAMP","RECORD","DataTableName(1)","DataTableName(2)","DataTableName(3)","DataTableName(4)","SkippedRecord(1)","SkippedRecord(2)","SkippedRecord(3)","SkippedRecord(4)","DataRecordSize(1)","DataRecordSize(2)","DataRecordSize(3)","DataRecordSize(4)","SecsPerRecord(1)","SecsPerRecord(2)","SecsPerRecord(3)","SecsPerRecord(4)","DataFillDays(1)","DataFillDays(2)","DataFillDays(3)","DataFillDays(4)","DataFilled(1,1)","DataFilled(2,1)","DataFilled(3,1)","DataFilled(4,1)"
+"TS","RN","","","","","","","","","records","records","records","records","","","","","days","days","days","days","","","",""
+"","","","","","","","","","","","","","","","","","","","","","","","","",""
+"2024-05-20 07:46:26.798",8,"MetData","RFmin","SysInfo","DailySysInfo",0,0,0,0,48134,2850815,47845,330,300,5,300,86400,167.1319,164.9777,166.1285,330,"16.5 percent filled"," 0.0 percent filled","16.8 percent filled"," 5.4 percent filled"
+"2024-05-20 07:46:26.798",10,"MetData","RFmin","SysInfo","DailySysInfo",0,0,0,0,48134,2850815,47845,330,300,5,300,86400,167.1319,164.9777,166.1285,330,"16.5 percent filled"," 0.0 percent filled","16.8 percent filled"," 5.4 percent filled"
