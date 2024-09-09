@@ -1,0 +1,5 @@
+"TOA5","1417 Afono_modem","CR350","5663","CR350-CELL205.Std.01.04","CPU:Samoa_mesonet_SG_v02.CRB","28596","Five_minute"
+"TIMESTAMP","RECORD","BattVolt_Avg","BattVolt_Min","Tpanel_Avg","TCair_Avg","WTlvl_Avg","Twt_F_Avg","RHenc"
+"TS","RN","Volts","Volts","Deg C","Deg F","cm","deg F","%"
+"","","Avg","Min","Avg","Avg","Avg","Avg","Smp"
+"2024-02-08 08:30:00",0,12.67,12.61,26.78,77.92,0.455,78.46,51.33
