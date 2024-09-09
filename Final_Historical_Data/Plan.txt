@@ -1,0 +1,2 @@
+Stitch all 15 minute data together into one file for each station 
+Same for 5 minute data 
