@@ -1,7 +1,7 @@
 import pandas as pd
 import os
-import logging
 import re
+import logging
 from datetime import datetime
 
 # Setup logging
@@ -12,74 +12,105 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 
-# Standardized header
-standardized_header = [
+# Standardized headers (desired final column names)
+standard_headers = [
     'Date/Time', 'WTlvl_Avg', 'Twt_F_Avg', 'BattVolt_Avg', 'BattVolt_Min', 
     'Tpanel_Avg', 'TCair_Avg', 'RHenc', 'RF_Tot (mm)'
 ]
 
+# Header variations from the text file mapped to standardized headers
+header_mapping = {
+    # Date and Time variations
+    'Date': 'Date/Time',
+    'Time': 'Date/Time',
+    'Date Time, GMT-11:00': 'Date/Time',
+    
+    # Pressure and Temperature variations
+    'Abs Pres (psi) c:1 2': 'WTlvl_Avg',
+    'Abs Pres, psi': 'WTlvl_Avg',
+    'Pressure': 'WTlvl_Avg',
+    'Temp (°F) c:2': 'Twt_F_Avg',
+    'Temp, °F': 'Twt_F_Avg',
+    'Temp F': 'Twt_F_Avg',
+    
+    # Battery Voltage and Panel Temperature variations
+    'BattVolt_Avg': 'BattVolt_Avg',
+    'BattVolt_Min': 'BattVolt_Min',
+    'Tpanel_Avg': 'Tpanel_Avg',
+    'TCair_Avg': 'TCair_Avg',
+    
+    # Relative Humidity and Rainfall
+    'RHenc': 'RHenc',
+    'RF_Tot (mm)': 'RF_Tot (mm)',
+    
+    # Other variations (to ignore or handle separately)
+    'Coupler Detached': None,
+    'Coupler Attached': None,
+    'Host Connected': None,
+    'Stopped': None,
+    'End Of File': None,
+    'Plot Title': None
+}
+
 # Function to map columns to the standardized header
 def map_columns(df):
-    # Create a mapping between the standardized header and variations in the dataset
-    mapping_dict = {
-        'Date/Time': ['Date', 'Time', 'Date Time', 'Timestamp'],
-        'WTlvl_Avg': ['Abs Pres (psi)', 'Pressure'],
-        'Twt_F_Avg': ['Temp', 'Temperature', 'Temp F', 'Temp °F'],
-        'BattVolt_Avg': ['Volts', 'Battery Voltage', 'BattVolt_Avg'],
-        'BattVolt_Min': ['Min Volts', 'BattVolt_Min'],
-        'Tpanel_Avg': ['Panel Temp', 'Tpanel_Avg'],
-        'TCair_Avg': ['Air Temp', 'TCair_Avg'],
-        'RHenc': ['RHenc', 'Relative Humidity'],
-        'RF_Tot (mm)': ['Rainfall', 'RF_Tot (mm)', 'Rainfall (mm)']
-    }
-
+    print(f"Mapping columns for file with headers: {df.columns.tolist()}")
     new_columns = {}
-    for standard_col in standardized_header:
-        for col_variation in mapping_dict.get(standard_col, []):
-            if col_variation in df.columns:
-                new_columns[col_variation] = standard_col
-                break
-
-    # Apply the mapping to rename the columns
+    for col in df.columns:
+        if col in header_mapping and header_mapping[col]:
+            new_columns[col] = header_mapping[col]
     df = df.rename(columns=new_columns)
 
     # Add missing columns
-    for std_col in standardized_header:
+    for std_col in standard_headers:
         if std_col not in df.columns:
             df[std_col] = None  # Add empty columns for missing data
-
-    return df[standardized_header]  # Reorder and return only the standardized columns
+    print(f"Final mapped columns: {df.columns.tolist()}")
+    return df[standard_headers]  # Return reordered columns
 
 # Function to clean and process CSV files
 def clean_csv_data(file_path):
     try:
+        logging.info(f"Processing CSV file: {file_path}")
         print(f"Processing CSV file: {file_path}")
         df = pd.read_csv(file_path)
         df = map_columns(df)  # Apply column mapping
-        print(f"CSV data: {df.head()}")  # Print first few rows for debugging
+        print(f"Processed CSV data preview:\n{df.head()}")
         return df
     except Exception as e:
         logging.error(f"Failed to process CSV {file_path}: {e}")
+        print(f"Error processing CSV file: {file_path}")
         return None
 
-# Function to clean and process XLSX files
+# Function to clean and process XLSX files with "PT data" sheet handling
 def clean_xlsx_data(file_path):
     try:
+        logging.info(f"Processing XLSX file: {file_path}")
         print(f"Processing XLSX file: {file_path}")
         xl = pd.ExcelFile(file_path)
         print(f"Available sheets: {xl.sheet_names}")  # Debug to print sheet names
 
-        # Try to find a valid sheet with data
-        df = pd.read_excel(file_path, sheet_name=xl.sheet_names[0])  # Default to the first sheet
+        # Use "PT data" sheet if it exists, otherwise select the first non-empty sheet
+        if 'PT data' in xl.sheet_names:
+            df = pd.read_excel(file_path, sheet_name='PT data')
+        else:
+            for sheet in xl.sheet_names:
+                df = pd.read_excel(file_path, sheet_name=sheet)
+                if not df.empty:
+                    print(f"Using sheet: {sheet}")
+                    break
+        
         df = map_columns(df)  # Apply column mapping
-        print(f"XLSX data: {df.head()}")  # Print first few rows for debugging
+        print(f"Processed XLSX data preview:\n{df.head()}")
         return df
     except Exception as e:
         logging.error(f"Failed to process XLSX {file_path}: {e}")
+        print(f"Error processing XLSX file: {file_path}")
         return None
 
 # Function to process files
 def process_file(file_path):
+    logging.info(f"Processing file: {file_path}")
     print(f"Processing file: {file_path}")
     if file_path.endswith('.csv'):
         return clean_csv_data(file_path)
@@ -87,11 +118,13 @@ def process_file(file_path):
         return clean_xlsx_data(file_path)
     else:
         logging.warning(f"Unsupported file format: {file_path}")
+        print(f"Unsupported file format: {file_path}")
         return None
 
 # Function to combine and clean data for the specified station
 def process_multiple_files_to_single_sheet(input_directory, output_file, start_date, end_date):
     all_data = []
+    logging.info("Starting the script.")
     print("Starting the script...")
 
     # Walk through directory and process files
@@ -108,18 +141,19 @@ def process_multiple_files_to_single_sheet(input_directory, output_file, start_d
     # Combine and save data if available
     if all_data:
         combined_df = pd.concat(all_data, ignore_index=True)
-        combined_df.columns = standardized_header  # Ensure the output has the standardized header
-        print(f"Saving data to {output_file}")
+        logging.info(f"Saving data to {output_file}")
         combined_df.to_excel(output_file, index=False, engine='openpyxl')
         logging.info(f"Data successfully saved to {output_file}")
         print(f"Data saved to: {output_file}")
+        print("Final combined data preview:")
+        print(combined_df.head())
     else:
-        print("No valid data found.")
         logging.info("No valid data found.")
+        print("No valid data found.")
 
     print("Script completed.")
 
-# Improved date extraction from filename
+# Date extraction from filename using regex (from v10)
 def extract_date_from_filename(file_name):
     try:
         date_match = re.search(r'(\d{1,2})\.(\d{1,2})\.(\d{4})', file_name)
@@ -130,13 +164,26 @@ def extract_date_from_filename(file_name):
             return extracted_date
         else:
             logging.warning(f"Failed to extract date from {file_name}")
+            print(f"Failed to extract date from filename: {file_name}")
             return None
     except Exception as e:
         logging.error(f"Error extracting date from {file_name}: {e}")
+        print(f"Error extracting date from filename: {file_name}")
         return None
 
+# Folder matching logic from v27 (more effective)
+def find_matching_station_folder(base_directory, station_name):
+    normalized_input = re.sub(r'[\.\s_]', '', station_name.lower())
+    
+    for folder in os.listdir(base_directory):
+        normalized_folder = re.sub(r'[\.\s_]', '', folder.lower())
+        if normalized_input in normalized_folder:
+            return os.path.join(base_directory, folder)
+    
+    return None
+
 # Main script
-if __name__ == "__main__":
+if __name__ == "__main__":    
     station_name = input("Enter the stream gauge name (e.g., 1410_Fagalii): ")
     start_date_str = input("Enter the start date (YYYY-MM-DD): ")
     end_date_str = input("Enter the end date (YYYY-MM-DD): ")
@@ -145,23 +192,10 @@ if __name__ == "__main__":
     end_date = datetime.strptime(end_date_str, "%Y-%m-%d")
 
     base_directory = 'C:\\Users\\ctebe\\OneDrive\\Desktop\\SG'
-    matched_folder = None
 
-    # Normalize station name for matching
-    normalized_station_name = re.sub(r'[^a-zA-Z0-9]', '', station_name.lower())
-
-    # Find matching folder
-    for folder in os.listdir(base_directory):
-        normalized_folder_name = re.sub(r'[^a-zA-Z0-9]', '', folder.lower())
-        if normalized_station_name in normalized_folder_name:
-            matched_folder = folder
-            break
-
-    if matched_folder:
-        input_directory = os.path.join(base_directory, matched_folder)
-        print(f"Using station folder: {input_directory}")
-        output_file = os.path.join(base_directory, f'{station_name}_combined_output_single_sheet.xlsx')
-
+    # Use the folder matching logic from v27
+    input_directory = find_matching_station_folder(base_directory, station_name)
+    
+    if input_directory:
+        output_file = os.path.join(input_directory, f'{station_name}_combined_output_single_sheet.xlsx')  
         process_multiple_files_to_single_sheet(input_directory, output_file, start_date, end_date)
-    else:
-        print(f"Station folder for '{station_name}' not found.")
