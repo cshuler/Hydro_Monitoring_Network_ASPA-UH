@@ -1,0 +1,16 @@
+Create Folders for each new RG station
+
+1321_Malaeimi_RG 
+1322_Fagaalu_RG
+1315_Fagaitua_RG
+1323_Malaeloa_RG
+1324_Satala_RG
+1325_Amouli_RG
+
+File naming convention 
+
+
+e.g. 
+1325_Amouli_RG-(adds something here?) 
+
+1325_Amouli_RG-2024-05-12.csv
