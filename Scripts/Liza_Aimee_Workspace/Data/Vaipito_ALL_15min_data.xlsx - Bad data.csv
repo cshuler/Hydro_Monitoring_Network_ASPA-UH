@@ -1,0 +1,11 @@
+Vaipito_ALL_15min_data,,,,,,
+,Bad data Start,Bad data End,Data affected,No data from,To,Notes
+,6/11/19 12:15,3/23/22 10:15,Batt_Volt_Avg,,,Doubled battery recordings
+,3/23/22 10:30,8/14/22 13:30,WS_mph_S_WVT,,,Was wired incorrectly for new operating program and gave incorrect readings
+,3/23/22 10:30,8/14/22 13:30,WindDir_D1_WVT,,,Was wired incorrectly for new operating program and gave incorrect readings
+,3/23/22 10:30,8/14/22 13:30,WindDir_SD1_WVT,,,Was wired incorrectly for new operating program and gave incorrect readings
+,3/23/22 10:30,8/14/22 13:30,SlrW_Avg,,,Was wired incorrectly for new operating program and gave incorrect readings
+,3/23/22 10:30,8/14/22 13:30,SlrMJ_Tot,,,Was wired incorrectly for new operating program and gave incorrect readings
+,10/14/20 20:00,3/23/22 10:30,WindDir_D1_WVT,,,Bad bearings
+,10/14/20 20:00,3/23/22 10:30,WindDir_SD1_WVT,,,Bad bearings
+,10/14/20 20:00,3/23/22 10:30,WS_mph_S_WVT,,,Bad bearings

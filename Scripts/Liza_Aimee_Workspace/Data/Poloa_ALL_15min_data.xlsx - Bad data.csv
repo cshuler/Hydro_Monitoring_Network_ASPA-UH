@@ -1,0 +1,13 @@
+Poloa_ALL_15min_data,,,,,,
+,Bad data Start,Bad data End,Data affected,No data from,To,Notes
+,3/15/22 11:30,3/15/22 11:30,BattV_Avg,,,Battery change
+,3/22/22 14:00,8/14/22 11:30,WS_mph_S_WVT,,,Was wired incorrectly for new operating program and gave incorrect readings
+,3/22/22 14:00,8/14/22 11:30,WindDir_D1_WVT,,,Was wired incorrectly for new operating program and gave incorrect readings
+,3/22/22 14:00,8/14/22 11:30,WindDir_SD1_WVT,,,Was wired incorrectly for new operating program and gave incorrect readings
+,3/22/22 14:00,8/14/22 11:30,SlrW_Avg,,,Was wired incorrectly for new operating program and gave incorrect readings
+,3/22/22 14:00,8/14/22 11:30,SlrMJ_Tot,,,Was wired incorrectly for new operating program and gave incorrect readings
+,3/22/22 6:00,3/22/22 6:00,PTemp_C_Max,,,Weird temperature shift
+,6/20/20 5:15,3/22/22 14:00,WS_mph_S_WVT,,,Bad bearings
+,6/20/20 5:15,3/22/22 14:00,WindDir_D1_WVT,,,Bad bearings
+,6/20/20 5:15,3/22/22 14:00,WindDir_SD1_WVT,,,Bad bearings
+,6/17/19 11:15,3/22/22 14:00,BattV_Avg,,,Doubled battery readings

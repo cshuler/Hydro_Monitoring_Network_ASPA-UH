@@ -1,0 +1,15 @@
+Aasu_ALL_15min_data,,,,,,
+,Bad data Start,Bad data End,Data affected,No data from ,To,Notes
+,,,ALL data,1/29/18 14:45,4/22/18 4:00,Battery died
+,3/6/20 12:00,3/6/20 12:00,AirTF_Avg,,,Negative numbers recorded
+,3/6/20 12:15,3/6/20 12:15,RH,,,Negative numbers recorded
+,3/7/20 15:30,3/7/20 15:30,AirTF_Avg,,,Negative numbers recorded
+,3/8/20 14:00,3/8/20 14:00,AirTF_Avg,,,Negative numbers recorded
+,3/8/20 18:45,3/8/20 19:00,RH,,,Negative numbers recorded
+,3/8/20 19:00,3/8/20 19:00,AirTF_Avg,,,Negative numbers recorded
+,3/9/20 8:45,4/10/21 22:00,AirTF_Avg,,,Negative numbers recorded
+,3/9/20 8:45,4/10/21 22:00,RH,,,Negative numbers recorded
+,4/14/20 0:15,3/25/22 13:45,Rain_in_Tot,,,Broken tipping gauge
+,8/27/19 20:30,4/28/22 12:45,WS_mph_S_WVT,,,Bad bearings
+,8/27/19 20:30,4/28/22 12:45,WindDir_D1_WVT,,,Bad bearings
+,8/27/19 20:30,4/28/22 12:45,WindDir_SD1_WVT,,,Bad bearings
