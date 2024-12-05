@@ -1,6 +1,6 @@
 ,Bad data Start,Bad data End,Data affected,No data from,To,Notes
-,,,,6/30/20 12:45,7/17/20 8:30,"No data, all instruments"
-,,,,3/22/22 13:30,3/23/22 11:00,"No data, all instruments"
+,6/30/20 12:45,7/17/20 8:30,ALL,6/30/20 12:45,7/17/20 8:30,"No data, all instruments"
+,3/22/22 13:30,3/23/22 11:00,ALL,3/22/22 13:30,3/23/22 11:00,"No data, all instruments"
 ,8/16/19 14:00,4/26/22 12:45,WS_mph_S_WVT,,,Bad bearings
 ,8/16/19 14:00,4/26/22 12:45,WindDir_D1_WVT,,,Bad bearings
 ,8/16/19 14:00,4/26/22 12:45,WindDir_SD1_WVT,,,Bad bearings
